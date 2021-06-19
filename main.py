@@ -11,10 +11,11 @@ driver.get("https://www.bigbasket.com/")
 
 action = ActionChains(driver)
 
+driver.implicitly_wait(5)
+
 driver.find_element_by_id('input').send_keys("carrot")
 driver.find_element_by_xpath("//button[@type= 'submit']").click()
 
-time.sleep(2)
 
 items = driver.find_elements_by_xpath("//div[@qa='product']")
 print(len(items))
@@ -27,22 +28,21 @@ print(window_before_title)
 driver.find_element_by_link_text("Carrot - Organically Grown").click()
 
 driver.find_element_by_xpath("//div[@data-qa = 'addToBasket']/span[1]").click()
-time.sleep(3)
 
-driver.find_element_by_xpath("//div[@data-qa = 'add']").click()
-
+# increasing the qty by 1
+# driver.find_element_by_xpath("//div[@data-qa = 'add']").click()
+# driver.find_element_by_class_name("_1aJzw").click()
 
 # using mouse hover to check and select listed categories
 action.move_to_element(driver.find_element_by_class_name("mImHu")).perform()
 
-action.move_to_element(driver.find_element_by_link_text("Kitchen, Garden & Pets")).click().perform()
-time.sleep(4)
+action.move_to_element(driver.find_element_by_link_text("Beauty & Hygiene")).click().perform()
 
 # Refining search by sorting listings in high-to-low preference
 driver.find_element_by_xpath("//div[@class='form-group']/select[1]").click()
-time.sleep(2)
 driver.find_element_by_xpath("//select[@id = 'sel1']/option[3]").click()
-time.sleep(5)
+
+driver.find_element_by_class_name("basket-content").click()
 
 driver.close()
 
